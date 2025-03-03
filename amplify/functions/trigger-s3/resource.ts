@@ -5,7 +5,7 @@ import * as s3Notifications from 'aws-cdk-lib/aws-s3-notifications';
 import { Construct } from 'constructs';
 import { CfnOutput } from 'aws-cdk-lib';
 
-export class S3TriggerStack extends cdk.Stack {
+export class S3TriggerStkUploadStack extends cdk.Stack {
   public readonly fileUploadBucket: s3.IBucket; 
 
   constructor(scope: Construct, id: string, props?: cdk.StackProps) {
