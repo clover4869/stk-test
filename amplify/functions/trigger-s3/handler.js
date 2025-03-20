@@ -12,7 +12,7 @@ const queueUrl = process.env.QUEUE_URL || "";
 
 exports.handler = async function (event) {
   console.log("Received event:", JSON.stringify(event, null, 2));
-
+  console.log({process, event});
   try {
     const record = event.Records[0];
     const bucketName = record.s3.bucket.name;
