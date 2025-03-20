@@ -14,7 +14,7 @@ export class S3TriggerStkUploadStack extends cdk.Stack {
     });
 
     this.fileUploadBucket = s3.Bucket.fromBucketName(this, 'StkUploadFile', 'stk-upload-file');
-
+    console.log({process, 'process.env.TEST_ENV' : process.env.TEST_ENV, 'process.env.TEST_ENV_BUILD' : process.env.TEST_ENV_BUILD})
 
     const s3TriggerLambda = new lambda.Function(this, 'S3TriggerLambda', {
       runtime: lambda.Runtime.NODEJS_18_X, // Specify the runtime
