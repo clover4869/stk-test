@@ -24,7 +24,7 @@ export class S3TriggerStkUploadStack extends cdk.Stack {
       description: 'This is my custom Lambda function created using CDK',
       memorySize: 128,
       environment: {
-        TEST: 'test',
+        TEST: process.env.TEST_ENV,
       }
     });
 
