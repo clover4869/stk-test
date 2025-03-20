@@ -33,6 +33,7 @@ export class S3TriggerStkUploadStack extends cdk.Stack {
       memorySize: 128,
       environment: {
         QUEUE_URL: queue.queueUrl,
+        CURRENT_ENV : process.env.CURRENT_ENV || ''
       }
     });
 
