@@ -12,5 +12,8 @@
   "scripts": {
     "build": "tsc",
     "cdk": "cdk"
+  },
+  "devDependencies": {
+    "@types/node": "^22.13.10"
   }
 }

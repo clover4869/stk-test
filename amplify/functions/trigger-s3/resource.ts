@@ -25,6 +25,7 @@ export class S3TriggerStkUploadStack extends cdk.Stack {
       memorySize: 128,
       environment: {
         TEST: process.env.TEST_ENV || 'process.env.TEST_ENV doesnot have value',
+        ENVIRONMENT: process.env.ENVIRONMENT   || 'process.env.ENVIRONMENT '
       }
     });
 
