@@ -7,18 +7,20 @@ import { Construct } from 'constructs';
 import { CfnOutput } from 'aws-cdk-lib';
 
 export class S3TriggerStkUploadStack extends cdk.Stack {
+  public readonly fileUploadBucket: s3.IBucket; 
   constructor(scope: Construct, id: string, props?: cdk.StackProps) {
     super(scope, id, {
       ...props
     });
 
     // define bucket
-    const bucket = s3.Bucket.fromBucketName(this, 'StkUploadFile', 'dev-stk-original-s3');
+    this.fileUploadBucket = s3.Bucket.fromBucketName(this, 'StkUploadFile', 'dev-stk-original-s3');
     
     // Create SQS queue
     const queue = new sqs.Queue(this, 'dev-s3-upload-queue', {
       visibilityTimeout: cdk.Duration.seconds(30),
     });
+    // node -e "require('./amplify/functions/trigger-s3/handler').handler(require('./test_event.json'), {}, console.log)"
 
     const s3TriggerLambda = new lambda.Function(this, 'S3TriggerLambda', {
       runtime: lambda.Runtime.NODEJS_18_X, 
@@ -32,9 +34,9 @@ export class S3TriggerStkUploadStack extends cdk.Stack {
       }
     });
 
-    bucket.grantRead(s3TriggerLambda);
+    this.fileUploadBucket.grantRead(s3TriggerLambda);
 
-    bucket.addEventNotification(s3.EventType.OBJECT_CREATED, new s3Notifications.LambdaDestination(s3TriggerLambda));
+    this.fileUploadBucket.addEventNotification(s3.EventType.OBJECT_CREATED, new s3Notifications.LambdaDestination(s3TriggerLambda));
 
     new CfnOutput(this, 'S3TriggerLambdaArn', {
       value: s3TriggerLambda.functionArn,
