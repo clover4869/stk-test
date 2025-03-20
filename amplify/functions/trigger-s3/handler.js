@@ -1,10 +1,4 @@
 const { SQSClient, SendMessageCommand } = require("@aws-sdk/client-sqs");
-const dotenv = require("dotenv");
-
-// Load environment variables in local mode
-if (process.env.CURRENT_ENV === "local") {
-  dotenv.config();
-}
 
 // Initialize SQS client
 const sqs = new SQSClient({ region: process.env.AWS_REGION || "ap-southeast-1" });
