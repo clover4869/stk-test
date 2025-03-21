@@ -5,6 +5,7 @@ import * as s3Notifications from 'aws-cdk-lib/aws-s3-notifications';
 import * as sqs from 'aws-cdk-lib/aws-sqs';
 import { Construct } from 'constructs';
 import { CfnOutput } from 'aws-cdk-lib';
+import { NodejsFunction } from 'aws-cdk-lib/aws-lambda-nodejs';
 
 export class S3TriggerStkUploadStack extends cdk.Stack {
   public readonly fileUploadBucket: s3.IBucket; 
@@ -25,10 +26,10 @@ export class S3TriggerStkUploadStack extends cdk.Stack {
     });
     // node -e "require('./amplify/functions/trigger-s3/handler').handler(require('./test_event.json'), {}, console.log)"
 
-    const s3TriggerLambda = new lambda.Function(this, 'S3TriggerLambda', {
+    const s3TriggerLambda = new NodejsFunction(this, 'S3TriggerLambda', {
       runtime: lambda.Runtime.NODEJS_18_X, 
       handler: 'handler.handler',
-      code: lambda.Code.fromAsset('./amplify/functions/trigger-s3'),
+      entry: './amplify/functions/trigger-s3',
       functionName: 'S3TriggerLambda',
       description: 'Custom Lambda function created using CDK. Using to trigger upload file from s3 and push msg to sqs.',
       memorySize: 128,
