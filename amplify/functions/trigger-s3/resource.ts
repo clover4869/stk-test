@@ -41,7 +41,7 @@ export class S3TriggerStkUploadStack extends cdk.Stack {
     });
 
         // add permission send msg to lambda function
-        queue.grantSendMessages(s3TriggerLambda)
+    queue.grantSendMessages(s3TriggerLambda)
     this.fileUploadBucket.grantRead(s3TriggerLambda);
 
     this.fileUploadBucket.addEventNotification(s3.EventType.OBJECT_CREATED, new s3Notifications.LambdaDestination(s3TriggerLambda));
