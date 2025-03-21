@@ -28,8 +28,8 @@ export class S3TriggerStkUploadStack extends cdk.Stack {
 
     const s3TriggerLambda = new NodejsFunction(this, 'S3TriggerLambda', {
       runtime: lambda.Runtime.NODEJS_18_X, 
-      handler: 'handler.handler',
-      entry: './amplify/functions/trigger-s3',
+      handler: 'handler',
+      entry: './amplify/functions/trigger-s3/handler.ts',
       functionName: 'S3TriggerLambda',
       description: 'Custom Lambda function created using CDK. Using to trigger upload file from s3 and push msg to sqs.',
       memorySize: 128,
