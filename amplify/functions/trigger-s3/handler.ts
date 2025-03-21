@@ -2,7 +2,7 @@ import { S3Event } from 'aws-lambda';
 import { SQSClient, SendMessageCommand } from '@aws-sdk/client-sqs';
 
 // Initialize SQS client
-const sqs = new SQSClient({ region: process.env.AWS_REGION || 'ap-northeast-1' });
+const sqs = new SQSClient({ region: process.env.REGION || 'ap-northeast-1' });
 const queueUrl = process.env.QUEUE_URL || '';
 
 export const handler = async (event: S3Event) => {

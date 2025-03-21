@@ -36,7 +36,7 @@ export class S3TriggerStkUploadStack extends cdk.Stack {
       environment: {
         QUEUE_URL: queue.queueUrl,
         CURRENT_ENV : process.env.CURRENT_ENV || '',
-        AWS_REGION : this.region
+        REGION : this.region
       }
     });
 
