@@ -14,15 +14,15 @@ export class S3TriggerStkUploadStack extends cdk.Stack {
       ...props
     });
     const BUCKET_UPLOAD_ORIGIN_NAME = process.env.BUCKET_UPLOAD_ORIGIN_NAME || 'BUCKET_UPLOAD_ORIGIN_NAME';
-    const SQS_QUEUE_NAME = process.env.SQS_QUEUE_NAME || 'SQS_QUEUE_NAME'
+    const SQS_QUEUE_UPLOAD_FILE_NAME = process.env.SQS_QUEUE_UPLOAD_FILE_NAME || 'SQS_QUEUE_UPLOAD_FILE_NAME'
 
     // define bucket
     this.fileUploadBucket = s3.Bucket.fromBucketName(this, BUCKET_UPLOAD_ORIGIN_NAME, BUCKET_UPLOAD_ORIGIN_NAME);
     
     // Create SQS queue
-    const queue = new sqs.Queue(this, SQS_QUEUE_NAME, {
+    const queue = new sqs.Queue(this, SQS_QUEUE_UPLOAD_FILE_NAME, {
       visibilityTimeout: cdk.Duration.seconds(30),
-      queueName: SQS_QUEUE_NAME
+      queueName: SQS_QUEUE_UPLOAD_FILE_NAME
     });
     // node -e "require('./amplify/functions/trigger-s3/handler').handler(require('./test_event.json'), {}, console.log)"
 

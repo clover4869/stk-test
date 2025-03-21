@@ -38,7 +38,6 @@ export class ConsumeSqsUploadStack extends cdk.Stack {
     queue.grantConsumeMessages(consumeSqsLambda);
 
     consumeSqsLambda.addEventSource(new eventSources.SqsEventSource(queue));
-
     new CfnOutput(this, 'ConsumeSqsUploadFileFnArn', {
       value: consumeSqsLambda.functionArn,
       exportName: 'ConsumeSqsUploadFileFn',
