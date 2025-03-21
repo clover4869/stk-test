@@ -31,7 +31,7 @@ export class ConsumeSqsUploadStack extends cdk.Stack {
         SQS_QUEUE_URL: queue.queueUrl,
         API_TOKEN: process.env.API_TOKEN || '',
         CELERY_TASK_API_URL: process.env.CELERY_TASK_API_URL || '',
-        AWS_REGION: this.region,
+        REGION: this.region,
       },
     });
 
