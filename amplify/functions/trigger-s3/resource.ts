@@ -21,6 +21,7 @@ export class S3TriggerStkUploadStack extends cdk.Stack {
     // Create SQS queue
     const queue = new sqs.Queue(this, SQS_QUEUE_NAME, {
       visibilityTimeout: cdk.Duration.seconds(30),
+      queueName: SQS_QUEUE_NAME
     });
     // node -e "require('./amplify/functions/trigger-s3/handler').handler(require('./test_event.json'), {}, console.log)"
 
